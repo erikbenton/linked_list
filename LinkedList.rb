@@ -46,14 +46,20 @@ class LinkedList
 	end
 
 	def at(index)
-		idx = 0
-		temp_node = Node.new()
-		temp_node = @head
-		while(idx < index && temp_node.next != nil)
-			temp_node = temp_node.next
-			idx += 1
+		if index >= 0
+			idx = 0
+			size = self.size
+			temp_node = Node.new()
+			temp_node = @head
+			while(idx < index)
+				temp_node = temp_node.next
+				idx += 1
+				if idx== size
+					return false
+				end
+			end
+			return temp_node
 		end
-		return temp_node
 	end
 
 	def pop(current_node=@head)
@@ -83,13 +89,12 @@ class LinkedList
 		
 	end
 
-	def find(data)
+	def find(data, current_node=@head)
 		idx = 0
 
 		if current_node.val == data
 			return idx
 		end
-
 		while current_node.next != nil
 			current_node = current_node.next
 			idx += 1
@@ -98,19 +103,47 @@ class LinkedList
 			end
 		end
 
-		return false
+		return -1
 	end
 
 	def to_s(current_node=@head)
+
+		text = ""
 		while current_node.next != nil
-			print current_node.val.to_s + " -> "
+			text += current_node.val.to_s + " -> "
 			current_node = current_node.next
 		end
-		puts current_node.val.to_s
+		text += current_node.val.to_s
+
+		return text
 	end
 
-	def insert_at(index)
+	def insert_at(index, val, current_node=@head)
+		size = self.size
 		
+		if index > 0
+
+			if index >= size
+				puts "Too far, appending to list..."
+				self.append(val)
+				return
+			end
+
+			if index == 0
+				self.prepend(val)
+				return
+			end
+
+			idx = 0
+			while idx < index-1
+				current_node = current_node.next
+				idx += 1
+			end
+
+			new_node = Node.new(val, current_node.next)
+			current_node.next = new_node
+
+		end
 	end
 
 	def remove_at(index)
