@@ -121,7 +121,7 @@ class LinkedList
 	def insert_at(index, val, current_node=@head)
 		size = self.size
 		
-		if index > 0
+		if index >= 0
 
 			if index >= size
 				puts "Too far, appending to list..."
@@ -146,8 +146,31 @@ class LinkedList
 		end
 	end
 
-	def remove_at(index)
+	def remove_at(index, current_node=@head)
+		size = self.size
 		
+		if index >= 0
+
+			if index >= size
+				puts "Too far, removing last on list..."
+				self.pop
+				return
+			end
+
+			if index == 0
+				@head = Node.new(@head.next.val, @head.next.next)
+				return
+			end
+
+			idx = 0
+			while idx < index-1
+				current_node = current_node.next
+				idx += 1
+			end
+
+			current_node.next = current_node.next.next
+
+		end
 	end
 
 

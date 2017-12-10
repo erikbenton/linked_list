@@ -34,3 +34,11 @@ puts linked_list.find(100)
 linked_list.append(10)
 linked_list.insert_at(4, 9)
 puts linked_list.to_s
+linked_list.remove_at(5)
+puts linked_list.to_s
+linked_list.remove_at(1)
+puts linked_list.to_s
+linked_list.remove_at(0)
+puts linked_list.to_s
+linked_list.remove_at(1)
+puts linked_list.to_s
